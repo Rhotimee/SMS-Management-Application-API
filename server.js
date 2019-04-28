@@ -1,9 +1,15 @@
-const express = require('express');
-const morgan = require('morgan');
+import express from 'express';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import routes from './routes/v1/index';
+
 require('dotenv').config();
+
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(morgan('combined'));
 
@@ -13,6 +19,7 @@ app.get('/', (req, res) => {
   });
 });
 
+app.use('/api/v1', routes);
 
 const { Port } = process.env;
 app.listen(Port, () => {
