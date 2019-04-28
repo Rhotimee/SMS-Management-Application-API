@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import routes from './routes/v1/index';
+import './config/mongoConfig';
 
 require('dotenv').config();
 
