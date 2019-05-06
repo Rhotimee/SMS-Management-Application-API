@@ -2,10 +2,10 @@ import Contact from '../models/Contact';
 
 class Contacts {
   static async addContact(req, res) {
-    const { name, phoneNumber, email } = req.body;
+    const { name, phoneNumber } = req.body;
 
     const savedContact = await Contact.create({
-      name, phoneNumber, email,
+      name, phoneNumber,
     });
 
     return res.status(201).json({
@@ -43,7 +43,7 @@ class Contacts {
 
   static async update(req, res) {
     const { _id } = req.params;
-    const { name, email, phoneNumber } = req.body;
+    const { name, phoneNumber } = req.body;
 
     const foundContact = await Contact.findById(_id);
     if (!foundContact) {
@@ -55,7 +55,6 @@ class Contacts {
     const updatedContact = await Contact.update({
       name: name || foundContact.name,
       phoneNumber: phoneNumber || foundContact.phoneNumber,
-      email: email || foundContact.email,
     });
 
     if (!updatedContact) {
