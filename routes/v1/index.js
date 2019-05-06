@@ -10,6 +10,10 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/add', catchErrors(Contact.addContact));
+router.post('/contacts', catchErrors(Contact.addContact));
+router.put('/contacts/:_id', catchErrors(Contact.update));
+router.delete('/contacts/:_id', catchErrors(Contact.delete));
+router.get('/contacts', catchErrors(Contact.fetchContact));
+router.get('/contacts', catchErrors(Contact.search));
 
 export default router;
