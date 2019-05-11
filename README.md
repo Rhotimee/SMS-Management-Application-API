@@ -6,25 +6,25 @@ This SMS Management system is an API which helps to manage contacts and sms
 ## Project Structure
 The project structure follows the **MVC** (Model View Controller) pattern.
 ```
-├── src
-│   ├── config
-│   │   └──  mongoConfig.js
-│   ├── controller
-│   │   ├── Contact.js
-│   │   └── Sms.js
-│   │   └── User.js
-│   ├── handlers
-│   │   ├── derrorHandlers.js
-│   ├── index.js
-│   ├── middlewares
-│   │   ├── index.js
-│   ├── models
-│   │   ├── Contact.js
-│   │   └── Sms.js
-│   │   └── User.js
-│   └── routes
-│       ├── index.js
-│   ├── server.js
+
+   ├── config
+   │   └──  mongoConfig.js
+   ├── controller
+   │   ├── Contact.js
+   │   └── Sms.js
+   │   └── User.js
+   ├── handlers
+   │   ├── derrorHandlers.js
+   ├── index.js
+   ├── middlewares
+   │   ├── index.js
+   ├── models
+   │   ├── Contact.js
+   │   └── Sms.js
+   │   └── User.js
+   └── routes
+       ├── index.js
+   ├── server.js
 ```
 
 ## Requirements
