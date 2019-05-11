@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const contactSchema = new Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     min: 1,
@@ -11,12 +11,12 @@ const contactSchema = new Schema({
   phoneNumber: {
     type: String,
     required: 'Please supply a phone number',
+    unique: 'Phone Number already exists',
   },
-  userId: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: 'Please login',
+  password: {
+    type: String,
+    required: 'Please provide your password',
   },
 });
 
-export default mongoose.model('Contact', contactSchema);
+export default mongoose.model('User', userSchema);
