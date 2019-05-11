@@ -9,9 +9,13 @@ const contactSchema = new Schema({
     max: 30,
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: 'Please supply a phone number',
-    unique: 'Phone Number already exists',
+  },
+  userId: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: 'Please login',
   },
 });
 

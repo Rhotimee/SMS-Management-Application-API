@@ -29,7 +29,7 @@ class Users {
       });
     }
 
-    const token = await jwt.sign({ id: user._id, phoneNumber }, 'salt', { expiresIn: '1h' });
+    const token = await jwt.sign({ id: user._id, phoneNumber }, process.env.SALT, { expiresIn: '1h' });
 
     return res.status(201).json({
       message: 'User created succesfully',
@@ -57,12 +57,20 @@ class Users {
       });
     }
 
-    const token = await jwt.sign({ id: user._id, phoneNumber }, 'salt', { expiresIn: '1h' });
+    const token = await jwt.sign({ id: user._id, phoneNumber }, process.env.SALT, { expiresIn: '1w' });
 
     return res.status(201).json({
       message: 'User logged succesfully',
       user,
       token,
+    });
+  }
+
+  static async list(req, res) {
+    const users = await User.find();
+    res.status(200).json({
+      message: 'Users',
+      users,
     });
   }
 }

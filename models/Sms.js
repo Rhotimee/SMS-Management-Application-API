@@ -8,12 +8,14 @@ const smsSchema = new Schema({
     min: 1,
     max: 300,
   },
-  phoneNumber: {
-    type: Number,
+  sentBy: {
+    type: String,
     required: 'Please supply a phone number',
-    unique: 'Phone Number already exists',
   },
-  // status:
+  sentTo: {
+    type: String,
+    required: 'Please supply a phone number',
+  },
 });
 
 export default mongoose.model('Sms', smsSchema);

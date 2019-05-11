@@ -9,7 +9,7 @@ const userSchema = new Schema({
     max: 30,
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: 'Please supply a phone number',
     unique: 'Phone Number already exists',
   },
@@ -17,20 +17,6 @@ const userSchema = new Schema({
     type: String,
     required: 'Please provide your password',
   },
-  contacts: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Contact',
-    },
-  ],
-  sentSMS: [{
-    type: mongoose.Schema.ObjectId,
-    ref: 'Sms',
-  }],
-  recievedSMS: [{
-    type: mongoose.Schema.ObjectId,
-    ref: 'Sms',
-  }],
 });
 
 export default mongoose.model('User', userSchema);

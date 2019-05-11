@@ -1,11 +1,13 @@
 import Contact from '../models/Contact';
 
+
 class Contacts {
   static async addContact(req, res) {
     const { name, phoneNumber } = req.body;
+    const { userId } = req;
 
     const savedContact = await Contact.create({
-      name, phoneNumber,
+      name, phoneNumber, userId,
     });
 
     return res.status(201).json({
@@ -15,7 +17,8 @@ class Contacts {
   }
 
   static async fetchContact(req, res) {
-    const contactList = await Contact.find();
+    const { userId } = req;
+    const contactList = await Contact.find({ userId });
     return res.status(200).json({
       message: 'Contacts found',
       contactList,
@@ -70,25 +73,35 @@ class Contacts {
   }
 
   static async delete(req, res) {
-    const { _id } = req.params;
+    const { phoneNumber } = req.params;
+    const { userId } = req;
 
-    const foundContact = await Contact.findById(_id);
+
+    const foundContact = await Contact.findOne({ userId, phoneNumber });
+
     if (!foundContact) {
       return res.status(400).json({
         message: 'Contact not found',
       });
     }
 
-    const deletedContact = await Contact.deleteOne({ _id });
+    if (userId !== foundContact.$oid) {
+      return res.status(400).json({
+        message: 'YOu are not permitted to delete this contact',
+      });
+    }
+
+    const deletedContact = await Contact.deleteOne({ phoneNumber });
 
     if (!deletedContact) {
-      return res.status(400).json({
+      return res.status(405).json({
         message: 'There was a problem deleting contact',
       });
     }
 
     return res.status(200).json({
       message: 'Contact deleted successfully',
+      foundContact,
     });
   }
 }
